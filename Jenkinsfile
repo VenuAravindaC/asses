@@ -1,7 +1,5 @@
 pipeline {
-    agent { 
-        label 'windows' 
-    }
+    agent any 
 
     stages {
         stage('Checkout') {
@@ -24,7 +22,7 @@ pipeline {
             steps {
                 bat '''
                 call venv\\Scripts\\activate
-                pytest test_app.py --junitxml=results.xml
+                pytest test_app.py
                 '''
             }
         }
@@ -32,10 +30,10 @@ pipeline {
 
     post {
         success {
-            echo ' Build Successful!'
+            echo ' Build Successful! .'
         }
         failure {
-            echo ' Build Failed!'
+            echo ' Build Failed! .'
         }
     }
 }
